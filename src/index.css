@@ -12,41 +12,48 @@ code {
     monospace;
 }
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-.contribution-graph {
+
+.contribution-map {
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* Выравнивание вправо */
 }
 
-.contribution-row {
+.months-row {
   display: flex;
 }
 
-.contribution-block {
-  width: 12px;
-  height: 12px;
-  margin: 1px;
-  border-radius: 50%;
+.month-cell {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  /* Задай здесь стили для ячейки месяца, такие как цвет фона, шрифт и т.д. */
 }
 
-.contribution-row:nth-child(7n+1) .contribution-block {
-  background-color: #ebedf0; /* Нет контрибуций */
+.table {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
 }
 
-/* Задание стилей для различных уровней контрибуций */
-.contribution-row:nth-child(7n+2) .contribution-block {
-  background-color: #c6e48b; /* 1-9 контрибуций */
+.days-row {
+  display: flex;
+  justify-content: space-between;
 }
 
-.contribution-row:nth-child(7n+3) .contribution-block {
-  background-color: #7bc96f; /* 10-19 контрибуций */
+.day-cell {
+  width: 100px;
+  height: 30px;
+  text-align: center;
+  /* Задай здесь стили для ячейки дня недели, такие как цвет фона, шрифт и т.д. */
 }
 
-.contribution-row:nth-child(7n+4) .contribution-block {
-  background-color: #239a3b; /* 20-29 контрибуций */
-}
-
-.contribution-row:nth-child(7n+5) .contribution-block {
-  background-color: #196127; /* 30+ контрибуций */
+.contribution-cell {
+  width: 100px;
+  height: 30px;
+  /* Задай здесь стили для ячейки контрибуций, такие как цвет фона, шрифт и т.д. */
 }
