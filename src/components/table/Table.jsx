@@ -45,24 +45,53 @@ const Table = (data) => {
     }
   };
 
+  const generateCalendar = () => {
+    const calendar = [];
+    let currentDate = new Date();
+    currentDate.setMonth(3); // Устанавливаем месяц на апрель (0-январь, 1-февраль, ..., 11-декабрь)
+    currentDate.setDate(1); // Устанавливаем день на 1
+
+    let week = [];
+    for (let i = 0; i < entriesArr.length; i++) {
+      const item = entriesArr[i];
+      const date = item[0];
+      const contributions = item[1];
+
+      week.push(
+        <div
+          className={table.item}
+          key={i}
+          style={{ backgroundColor: getColor(contributions) }}
+          onClick={() => handleClick(date, contributions)}
+        >
+          <span className={table.day}></span>
+        </div>
+      );
+
+      if (week.length === 7 || i === entriesArr.length - 1) {
+        calendar.push(<div key={i}>{week}</div>);
+        week = [];
+      }
+    }
+
+    return calendar;
+  };
+
+  const getContributionsByDate = (date) => {
+    const entry = entriesArr.find((item) => item[0] === date);
+    return entry ? entry[1] : 0;
+  };
+
   return (
     <>
       <div className={table.section}>
         <div className={table.container}>
-          <div className={table.box}>
-            {entriesArr.map((item, index) => {
-              const date = item[0];
-              const contributions = item[1];
-              return (
-                <div
-                  className={table.item}
-                  key={index}
-                  style={{ backgroundColor: getColor(contributions) }}
-                  onClick={() => handleClick(date, contributions)}
-                ></div>
-              );
-            })}
+          <div className={table.months}>
+            {months.map((item) => (
+              <div className={table.month}>{item}</div>
+            ))}
           </div>
+          <div className={table.box}>{generateCalendar()}</div>
         </div>
         {clickedDate && (
           <div className={table.text}>
